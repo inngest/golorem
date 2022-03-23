@@ -15,10 +15,11 @@ type Lorem struct {
 	r *rand.Rand
 }
 
-func New() *Lorem {
-	return &Lorem{
-		r: rand.New(rand.NewSource(time.Now().UnixNano())),
+func New(r *rand.Rand) *Lorem {
+	if r == nil {
+		r = rand.New(rand.NewSource(time.Now().UnixNano()))
 	}
+	return &Lorem{r: r}
 }
 
 // Generate a natural word len.
